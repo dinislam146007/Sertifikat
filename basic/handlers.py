@@ -6,7 +6,6 @@ from search.search import find_certificates_for_product
 router = Router()
 
 
-
 @router.message(Command("start"))
 async def send_welcome(message: Message):
     await message.reply("Укажите тип вашей продукции во <b>множественном</b> числе, например:\n"
