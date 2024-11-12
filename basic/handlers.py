@@ -20,7 +20,7 @@ async def send_welcome(message: Message):
     ,reply_markup=InlineKeyboardMarkup(inline_keyboard=kb)
                         )
 
-f
+
 
 @router.message()
 async def send_certificate(message: Message):
