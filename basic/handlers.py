@@ -16,7 +16,7 @@ async def send_welcome(message: Message):
         InlineKeyboardButton(text='СГР', callback_data='cert СГР')],
         [InlineKeyboardButton(text='Связь с менежером', url='https://t.me/Nastia_NZ')]
     ]
-    await message.answer("Привет. Это бот сертификации. Напиши что хочешь"
+    await message.answer("Привет. Это бот сертификации"
     ,reply_markup=InlineKeyboardMarkup(inline_keyboard=kb)
                         )
 
