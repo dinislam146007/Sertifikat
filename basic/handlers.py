@@ -5,15 +5,14 @@ from search.search import find_certificates_for_product
 
 router = Router()
 
-
 @router.message(Command("start"))
 async def send_welcome(message: Message):
     kb = [
         [InlineKeyboardButton(text='Проверить продукцию', callback_data='search')],
-        [InlineKeyboardButton(text='Сертификат ТРТС', callback_data='cert СТРТС'),
-        InlineKeyboardButton(text='Декларация ТРТС', callback_data='cert ДТРТС')],
-        [InlineKeyboardButton(text='Сертификат ГОСТр', callback_data='cert ГОСТр'),
-        InlineKeyboardButton(text='СГР', callback_data='cert СГР')],
+        [InlineKeyboardButton(text='Сертификат ТРТС', callback_data='cert strtc'),
+        InlineKeyboardButton(text='Декларация ТРТС', callback_data='cert dtrtc')],
+        [InlineKeyboardButton(text='Сертификат ГОСТр', callback_data='cert gostr'),
+        InlineKeyboardButton(text='СГР', callback_data='cert sgr')],
         [InlineKeyboardButton(text='Связь с менежером', url='https://t.me/Nastia_NZ')]
     ]
     await message.answer("Привет. Это бот сертификации"
@@ -24,7 +23,7 @@ async def send_welcome(message: Message):
 @router.callback_query(F.data.startswith('cert'))
 async def cert(callback: CallbackQuery):
     cert_info = callback.data.split()[1]
-    await callback.message.edit_text(f'Сертификат: ')
+    await callback.message.edit_text(text=f'Сертификат: ')
 
 
 
