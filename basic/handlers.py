@@ -24,7 +24,7 @@ async def send_welcome(message: Message):
 @router.callback_query(F.data.stertswith('cert'))
 async def cert(callback: CallbackQuery):
     cert_info = callback.data.split()[1]
-    await callback.message.edit_text(f'{cert_info}')
+    await callback.message.edit_text(f'Сертификат: ')
 
 
 
