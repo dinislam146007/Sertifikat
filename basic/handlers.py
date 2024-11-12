@@ -8,11 +8,18 @@ router = Router()
 
 @router.message(Command("start"))
 async def send_welcome(message: Message):
-    await message.reply("Укажите тип вашей продукции во <b>множественном</b> числе, например:\n"
-                        "<i>Шампунь >> шампуни</i>\n"
-                        "<i>Микроволновки >> печи микроволновые</i>\n"
-                        "<i>Зарядка >> устройства для зарядки</i>"
+    kb = [
+        [InlineKeyboardButton(text='Проверить продукцию', callback_data='search')],
+        [InlineKeyboardButton(text='Сертификат ТРТС', callback_data='cert '),
+        InlineKeyboardButton(text='Декларация ТРТС', callback_data='cert')],
+        [InlineKeyboardButton(text='Сертификат ГОСТр', callback_data='cert'),
+        InlineKeyboardButton(text='СГР', callback_data='cert')],
+        [InlineKeyboardButton(text='Связь с менежером', url='https://t.me/Nastia_NZ')]
+    ]
+    await message.answer("Привет"
+    ,reply_markup=InlineKeyboardMarkup(inline_keyboard=kb)
                         )
+
 
 
 @router.message()
@@ -39,3 +46,4 @@ async def send_certificate(message: Message):
     else:
         msg = "Тип сертификата для этого товара не найден."
         await message.answer(msg)
+
