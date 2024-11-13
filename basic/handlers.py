@@ -44,9 +44,7 @@ async def search(callback: CallbackQuery, state: FSMContext):
 
 @router.message(SearchState.text)
 async def search_state(message: Message, state: FSMContext, bot: Bot):
-
     data = await state.get_data()
-    await message.answer(f"{data}")
     await bot.delete_message(message_id=data['msg'], chat_id=message.from_user.id)
     product_name = message.text.strip().lower()
     certificates = find_certificates_for_product(product_name)
@@ -54,11 +52,13 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
     if certificates:
         unique_certificates = []
         msg = f"Найденные совпадения для товара <b>{product_name}</b>:\n"
-
         for item, cert_type in certificates:
             if cert_type not in unique_certificates:
                 unique_certificates.append(cert_type)
-            msg += f"- {item} <b>(Тип сертификата: {cert_type})</b>\n"
+            if cert_type:
+                msg += f"- {item} <b>(Тип сертификата: {cert_type})</b>\n"
+            else:
+                msg += f"- {item}\n"
         key = []
         for cert in unique_certificates:
             key.append([
@@ -83,4 +83,9 @@ async def cert(callback: CallbackQuery):
         text = 'Сертификат ГОСТр'
     else:
         text = 'СГР'
-    await callback.message.edit_text(text=f'Сертификат: {text}')
+    await callback.message.edit_text(
+        text=f'Сертификат: {text}\n
+        Цена: цена',
+        reply_markup=cert_inline()
+        )
+
