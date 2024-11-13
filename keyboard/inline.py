@@ -11,7 +11,7 @@ def start_inline():
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
-def close_state():
+def close_state_search():
     kb = [
         [InlineKeyboardButton(text='Назад', callback_data="close_state")]
     ]
