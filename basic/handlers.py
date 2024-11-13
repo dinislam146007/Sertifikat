@@ -36,7 +36,7 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
 async def search(callback: CallbackQuery, state: FSMContext):
     await callback.message.edit_text(
         text='Введите названи е вашей продукции',
-        reply_markup=close_state()
+        reply_markup=close_state_search()
     )
     await state.set_state(SearchState.text)
 
