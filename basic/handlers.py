@@ -34,7 +34,7 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == 'search')
 async def search(callback: CallbackQuery, state: FSMContext):
-    msg = await callback.message.edit_text(
+    await callback.message.edit_text(
         text='Введите названи е вашей продукции',
         reply_markup=close_state()
     )
