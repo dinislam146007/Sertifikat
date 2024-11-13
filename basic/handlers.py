@@ -48,17 +48,13 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
     await bot.delete_message(message_id=data['msg'], chat_id=message.from_user.id)
     product_name = message.text.strip().lower()
     certificates = find_certificates_for_product(product_name)
-
     if certificates:
         unique_certificates = []
         msg = f"Найденные совпадения для товара <b>{product_name}</b>:\n"
         for item, cert_type in certificates:
             if cert_type not in unique_certificates:
                 unique_certificates.append(cert_type)
-            if cert_type:
-                msg += f"- {item} <b>(Тип сертификата: {cert_type})</b>\n"
-            else:
-                msg += f"- {item}\n"
+            msg += f"- {item} <b>(Тип сертификата: {cert_type})</b>\n"
         key = []
         for cert in unique_certificates:
             key.append([
