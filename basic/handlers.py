@@ -22,11 +22,11 @@ async def send_welcome(message: Message):
                         
 @router.callback_query(F.data == 'close_state')
 async def close_state(callback: CallbackQuery, state: FSMContext):
-    current_state = await state.get_state()
-    if current_state is None:
-        return
-    await state.clear()
-    await callback.answer("Ожидание ответа успешно отменено.")
+    try:
+        current_state = await state.get_state()
+        await state.clear()
+    except Exception:
+        pass
     await callback.message.edit_text(
         text="Привет",
         reply_markup=start_inline()  
