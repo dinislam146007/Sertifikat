@@ -20,6 +20,6 @@ def close_state_inline():
 
 def cert_inline():
     kb = [
-        [InlineKeyboardButton(text='Оставить заявку')]
+        [InlineKeyboardButton(text='Оставить заявку', callback_data='request')]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

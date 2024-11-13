@@ -83,7 +83,7 @@ async def cert(callback: CallbackQuery):
     else:
         text = 'СГР'
     await callback.message.edit_text(
-        text=f'Сертификат: {text}\n Цена: цена',
+        text=f'Сертификат: {text} \n Цена: цена',
         reply_markup=cert_inline()
         )
 
