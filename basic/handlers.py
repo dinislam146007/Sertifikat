@@ -3,7 +3,8 @@ from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, C
 from aiogram.filters import Command
 from search.search import find_certificates_for_product
 from keyboard.inline import *
-from aiogram.fsm.context import FSMContext, State, StatesGroup
+from aiogram.fsm.context import FSMContext
+from aiogram.filters.state import State, StatesGroup
 
 
 router = Router()
