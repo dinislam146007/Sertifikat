@@ -1,4 +1,4 @@
-from aiogram import Router, F
+from aiogram import Router, F, Bot
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from aiogram.filters import Command
 from search.search import find_certificates_for_product
@@ -39,9 +39,13 @@ async def search(callback: CallbackQuery, state: FSMContext):
         reply_markup=close_state_inline()
     )
     await state.set_state(SearchState.text)
+    await state.set_data(msg=msg.message_id)
+
 
 @router.message(SearchState.text)
-async def search_state(message: Message, state: FSMContext):
+async def search_state(message: Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    await bot.delete_message(message_id=data['msg'], chat_id=message.from_user.id)
     product_name = message.text.strip().lower()
     certificates = find_certificates_for_product(product_name)
 
