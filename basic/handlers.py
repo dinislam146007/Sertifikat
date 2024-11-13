@@ -97,13 +97,16 @@ async def request(callback: CallbackQuery, state: FSMContext):
         reply_markup=close_state_inline()
     )
     await state.set_state(RequestForm.phone)
+    await state.update_data(msg=msg.message_id)
 
 
 @router.message(RequestForm.phone)
 async def request_phone(message: Message, state: FSMContext, bot: Bot):
     phone = message.text
+    data = await state.get_data()
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['msg'])
     await state.update_data(phone=phone)
-    await message.edit_text(
+    await message.answer(
         text='Заявка отправлена',
         reply_markup=close_state_inline()
     )
