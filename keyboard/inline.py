@@ -18,8 +18,9 @@ def close_state_inline():
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
-def cert_inline():
+def cert_inline(type_cert):
     kb = [
-        [InlineKeyboardButton(text='Оставить заявку', callback_data='request')]
+        [InlineKeyboardButton(text='Оставить заявку', callback_data=f'request {type_cert}')], 
+        [InlineKeyboardButton(text='Назад', callback_data="close_state")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

@@ -12,6 +12,8 @@ router = Router()
 class SearchState(StatesGroup):
     text = State()
 
+class RequestForm(StatesGroup):
+    phone = State()
     
 @router.message(Command("start"))
 async def send_welcome(message: Message):
@@ -84,6 +86,31 @@ async def cert(callback: CallbackQuery):
         text = 'СГР'
     await callback.message.edit_text(
         text=f'Сертификат: {text} \n Цена: цена',
-        reply_markup=cert_inline()
+        reply_markup=cert_inline(cert_info)
         )
 
+@router.callback_query(F.data.startswith('request'))
+async def request(callback: CallbackQuery, state: FSMContext):
+    info = callback.data.split()[1]
+    msg = await callback.message.edit_text(
+        text='Введите номер телефона',
+        reply_markup=close_state_inline()
+    )
+    await state.set_state(RequestForm.phone)
+
+
+@router.message(RequestForm.phone)
+async def request_phone(message: Message, state: FSMContext, bot: Bot):
+    phone = message.text
+    await state.update_data(phone=phone)
+    await message.edit_text(
+        text='Заявка отправлена',
+        reply_markup=close_state_inline()
+    )
+    await bot.send_message(chat_id=2047427176, 
+                           text='Вам пришла заявка!\n'
+                           f'Телефон: {phone}'
+                           f'Username: @{message.from_user.username}'
+                           f'ID: {message.from_user.id}'
+                           )
+    await state.clear()
