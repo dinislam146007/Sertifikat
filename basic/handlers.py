@@ -44,7 +44,9 @@ async def search(callback: CallbackQuery, state: FSMContext):
 
 @router.message(SearchState.text)
 async def search_state(message: Message, state: FSMContext, bot: Bot):
+
     data = await state.get_data()
+    await message.answer(f"{data}")
     await bot.delete_message(message_id=data['msg'], chat_id=message.from_user.id)
     product_name = message.text.strip().lower()
     certificates = find_certificates_for_product(product_name)
