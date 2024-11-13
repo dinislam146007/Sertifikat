@@ -64,8 +64,11 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
 
         await message.answer(msg, reply_markup=keyboard)
     else:
-        msg = "Тип сертификата для этого товара не найден."
-        await message.answer(msg)
+        msg = "Тип сертификата для этого товара не найден"
+        await message.answer(\
+            text=msg,
+            reply_markup=close_state_inline())
+    await state.clear()
 
 
 @router.callback_query(F.data.startswith('cert'))
