@@ -29,7 +29,7 @@ def find_certificates_for_product(product):
     if matched_items:
         return matched_items
     else:
-        return [("Тип сертификата для этого товара не найден.", "")]
+        return None
 
 
 # Пример взаимодействия с пользователем
