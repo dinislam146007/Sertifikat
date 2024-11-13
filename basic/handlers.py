@@ -3,6 +3,7 @@ from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, C
 from aiogram.filters import Command
 from search.search import find_certificates_for_product
 
+
 router = Router()
 
 @router.message(Command("start"))
