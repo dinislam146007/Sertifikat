@@ -39,7 +39,7 @@ async def search(callback: CallbackQuery, state: FSMContext):
         reply_markup=close_state_inline()
     )
     await state.set_state(SearchState.text)
-    await state.set_data(msg=msg.message_id)
+    await state.update_data(msg=msg.message_id)
 
 
 @router.message(SearchState.text)
