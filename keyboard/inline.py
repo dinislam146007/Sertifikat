@@ -22,7 +22,7 @@ def close_state_inline():
 def cert_inline(type_cert, trts_type):
     kb = [
     ]
-    if (type_cert == 0) and (trts_type is not None):
+    if (type_cert == 0) and (trts_type is None):
         kb.append([InlineKeyboardButton(text='ТРТС 004', callback_data='cert 0 004')])
         kb.append([InlineKeyboardButton(text='ТРТС 010', callback_data='cert 0 010')])
         kb.append([InlineKeyboardButton(text='ТРТС 018', callback_data='cert 0 018')])
