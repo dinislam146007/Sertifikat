@@ -35,6 +35,7 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
         reply_markup=start_inline()  
     )
 
+
 @router.callback_query(F.data == 'search')
 async def search(callback: CallbackQuery, state: FSMContext):
     text = 'Укажите тип вашей продукции во множественном числе, например:\n'
@@ -81,14 +82,20 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
 @router.callback_query(F.data.startswith('cert'))
 async def cert(callback: CallbackQuery):
     cert_info = int(callback.data.split()[1])
+
     if cert_info == 0:
-        text = 'Сертификат ТРТС'
-        msg = 'Выберите тип сертификата:'
+        trts_type = callback.data.split()[1]
+        if int(trts_type) == 0:
+            text = 'Сертификат ТРТС'
+            msg = 'Выберите тип сертификата:'
+        else:
+            text = f'ТРТС {trts_type}'
+            msg = None
     elif cert_info == 1:
         text = 'Декларация ТРТС'
         msg = None
     elif cert_info == 2:
-        text = 'Сертификат ГОСТр'
+        text = 'ГОСТр'
         msg = None
     else:
         text = 'СГР'
