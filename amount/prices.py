@@ -6,7 +6,7 @@ home = os.path.dirname(__file__)
 
 
 def get_amounts():
-    with open(f'{home}/amount/price.json') as f:
+    with open(f'{home}/price.json') as f:
         return json.load(f)
     
 
