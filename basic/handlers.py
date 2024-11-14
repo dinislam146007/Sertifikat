@@ -10,6 +10,18 @@ from amount.prices import get_amounts
 
 router = Router()
 
+def back_cert_type(cert: str):
+    if cert == 'СГР':
+        t = 3
+        t1 = '0'
+    elif cert.startswith('ТРТС'):
+        t = 0
+        t1 = cert.split()[1]
+    else:
+        t = 2
+        t1 = '0'
+    return [t, t1]
+
 class SearchState(StatesGroup):
     text = State()
 
@@ -65,8 +77,9 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
             msg += f"- {item} <b>(Тип сертификата: {cert_type})</b>\n"
         key = []
         for cert in unique_certificates:
+            c = back_cert_type(cert)
             key.append([
-                InlineKeyboardButton(text=cert, callback_data=f'cert {cert}')
+                InlineKeyboardButton(text=cert, callback_data=f"cert {c[0]} {c[1]}")
             ])
         keyboard = InlineKeyboardMarkup(inline_keyboard=key)
 
