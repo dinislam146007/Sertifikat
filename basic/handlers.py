@@ -84,7 +84,7 @@ async def cert(callback: CallbackQuery):
     cert_info = int(callback.data.split()[1])
 
     if cert_info == 0:
-        trts_type = callback.data.split()[1]
+        trts_type = callback.data.split()[2]
         if int(trts_type) == 0:
             text = 'Сертификат ТРТС'
             msg = 'Выберите тип сертификата:'
