@@ -82,14 +82,17 @@ async def cert(callback: CallbackQuery):
     cert_info = int(callback.data.split()[1])
     if cert_info == 0:
         text = 'Сертификат ТРТС'
+        msg = 'Выберите тип сертификата:'
     elif cert_info == 1:
         text = 'Декларация ТРТС'
     elif cert_info == 2:
         text = 'Сертификат ГОСТр'
     else:
         text = 'СГР'
+    if not msg:
+        msg = f'Сертификат: {text} \n Цена: цена'
     await callback.message.edit_text(
-        text=f'Сертификат: {text} \n Цена: цена',
+        text=msg,
         reply_markup=cert_inline(cert_info)
         )
 
