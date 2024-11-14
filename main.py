@@ -10,6 +10,7 @@ from aiogram.client.bot import DefaultBotProperties
 
 from config import API_TOKEN
 
+
 logging.basicConfig(level=logging.INFO)
 
 

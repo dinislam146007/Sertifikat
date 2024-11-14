@@ -1,6 +1,5 @@
 import os
 import json
-from main import home
 
 
 home = os.path.dirname(__file__)
