@@ -37,9 +37,9 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(F.data == 'search')
 async def search(callback: CallbackQuery, state: FSMContext):
     text = 'Укажите тип вашей продукции во множественном числе, например:\n'
-    text += '<b>Шампунь >> шампуни</b>\n'
-    text += '<b>Микроволновки >> печи микроволновые</b>\n'
-    text += '<b>Зарядка >> устройства для зарядки</b>'
+    text += '<i>Шампунь >> шампуни</i>\n'
+    text += '<i>Микроволновки >> печи микроволновые</i>\n'
+    text += '<i>Зарядка >> устройства для зарядки</i>'
     msg = await callback.message.edit_text(
         text=text,
         reply_markup=close_state_inline()
