@@ -95,7 +95,7 @@ async def cert(callback: CallbackQuery):
         msg = None
     if not msg:
         data = get_amounts()
-        msg = f'Сертификат: {text} \n Цена: {data['text']}'
+        msg = f'Сертификат: {text} \n Цена: {data[f'{text}']}'
     await callback.message.edit_text(
         text=msg,
         reply_markup=cert_inline(cert_info)
