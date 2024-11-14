@@ -13,6 +13,8 @@ from config import API_TOKEN
 
 logging.basicConfig(level=logging.INFO)
 
+home = os.path.dirname(__file__)
+
 
 bot = Bot(token=API_TOKEN, session=AiohttpSession(), default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher(storage=MemoryStorage())

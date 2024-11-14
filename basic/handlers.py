@@ -5,6 +5,7 @@ from search.search import find_certificates_for_product
 from keyboard.inline import *
 from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import State, StatesGroup
+from amount.prices import get_amounts
 
 
 router = Router()
@@ -93,7 +94,8 @@ async def cert(callback: CallbackQuery):
         text = 'СГР'
         msg = None
     if not msg:
-        msg = f'Сертификат: {text} \n Цена: цена'
+        data = get_amounts()
+        msg = f'Сертификат: {text} \n Цена: {data['text']}'
     await callback.message.edit_text(
         text=msg,
         reply_markup=cert_inline(cert_info)
