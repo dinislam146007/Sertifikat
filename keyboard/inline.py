@@ -19,17 +19,18 @@ def close_state_inline():
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
-def cert_inline(type_cert):
+def cert_inline(type_cert, trts_type):
     kb = [
     ]
-    if type_cert == 0:
+    if (type_cert == 0) and (trts_type is not None):
         kb.append([InlineKeyboardButton(text='ТРТС 004', callback_data='cert 0 004')])
         kb.append([InlineKeyboardButton(text='ТРТС 010', callback_data='cert 0 010')])
         kb.append([InlineKeyboardButton(text='ТРТС 018', callback_data='cert 0 018')])
         kb.append([InlineKeyboardButton(text='ТРТС 020', callback_data='cert 0 020')])
     else:
+
         kb.append(
-            [InlineKeyboardButton(text='Оставить заявку', callback_data=f'request {type_cert}')], 
+            [InlineKeyboardButton(text='Оставить заявку', callback_data=f'request {type_cert} {trts_type}')], 
         )
     kb.append(
         [InlineKeyboardButton(text='Назад', callback_data="close_state")]

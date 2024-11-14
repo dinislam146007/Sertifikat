@@ -92,12 +92,15 @@ async def cert(callback: CallbackQuery):
             text = f'ТРТС {trts_type}'
             msg = None
     elif cert_info == 1:
+        trts_type = None
         text = 'Декларация ТРТС'
         msg = None
     elif cert_info == 2:
+        trts_type = None
         text = 'ГОСТр'
         msg = None
     else:
+        trts_type = None
         text = 'СГР'
         msg = None
     if not msg:
@@ -105,7 +108,7 @@ async def cert(callback: CallbackQuery):
         msg = f"Сертификат: {text} \n Цена: {data[f'{text}']}"
     await callback.message.edit_text(
         text=msg,
-        reply_markup=cert_inline(cert_info)
+        reply_markup=cert_inline(cert_info, trts_type)
         )
 
 @router.callback_query(F.data.startswith('request'))
