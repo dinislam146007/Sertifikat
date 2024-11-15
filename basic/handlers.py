@@ -264,7 +264,8 @@ async def request_three(message: Message, state: FSMContext, bot: Bot):
     )
     data = await state.get_data()
     await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
-    msg = f'Заявка на {data['type_cert']} от @{message.from_user.username}\n\n'
+    t = data['type_cert']
+    msg = f'Заявка на {t} от @{message.from_user.username}\n\n'
     msg += f"1. Название организации: {data['name']}\n"
     msg += f"2. Место нахождения и адрес места осуществления деятельности: {data['street']}\n"
     msg += f"3. Телефон: {data['phone']}\n"
