@@ -7,6 +7,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import State, StatesGroup
 from amount.prices import get_amounts
 from administrate.admin_file import *
+from aiogram.types import InputFile
 
 
 router = Router()
@@ -27,6 +28,7 @@ class SearchState(StatesGroup):
     text = State()
 
 class RequestForm(StatesGroup):
+    choice = State()
     phone = State()
     
 @router.message(Command("start"))
@@ -134,11 +136,23 @@ async def cert(callback: CallbackQuery):
 async def request(callback: CallbackQuery, state: FSMContext):
     info = callback.data.split()[1]
     msg = await callback.message.edit_text(
-        text='Введите номер телефона',
-        reply_markup=close_state_inline()
+        text='Выберите',
+        reply_markup=request_choice()
     )
-    await state.set_state(RequestForm.phone)
+    await state.set_state(RequestForm.choice)
     await state.update_data(msg=msg.message_id)
+
+@router.callback_query(F.data.startswith('choice_request'), RequestForm.choice)
+async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
+    action = callback.data.split()[1]
+    data = await state.get_data()
+    if action == 'blank':
+        await callback.message.answer_document(
+            InputFile('/documents/Заявка.docx')
+        )
+        await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
+    else:
+        await callback.message.answer('Введите')
 
 
 @router.message(RequestForm.phone)

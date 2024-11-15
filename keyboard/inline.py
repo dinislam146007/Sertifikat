@@ -70,3 +70,12 @@ def change_price_inline():
         [InlineKeyboardButton(text='Назад', callback_data='admin')]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def request_choice():
+    kb = [
+        [InlineKeyboardButton(text='Скачать бланк', callback_data='choice_request blank'),
+         InlineKeyboardButton(text='Заполнить сейчас', callback_data='choice_request now')
+         ]
+         [InlineKeyboardButton(text='Отмена', callback_data='close_state')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
