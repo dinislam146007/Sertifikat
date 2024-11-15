@@ -147,12 +147,10 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
     action = callback.data.split()[1]
     data = await state.get_data()
     if action == 'blank':
-        doc_path = '/home/Sertifikat/documents/doc.docx'
-        input_file = InputFile(doc_path)
         await callback.message.answer(f'{doc}')
         await bot.send_document(
             callback.from_user.id,
-            input_file
+            ('Заявка.docx', doc)
         )
         await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
     else:
