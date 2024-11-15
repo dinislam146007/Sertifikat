@@ -12,6 +12,16 @@ from documents.document import doc
 
 router = Router()
 
+def type_cert(t, t1):
+    if t == '0':
+        return f'ТРТС {t1}'
+    elif t == '1':
+        return 'Декларация ТРТС'
+    elif t == '2':
+        return 'ГОСТр'
+    else:
+        return 'СГР'
+
 def back_cert_type(cert: str):
     if cert == 'СГР':
         t = 3
@@ -139,12 +149,17 @@ async def cert(callback: CallbackQuery):
 @router.callback_query(F.data.startswith('request'))
 async def request(callback: CallbackQuery, state: FSMContext):
     info = callback.data.split()[1]
+    if info == '0':
+        t1 = callback.data.split()[2]
+    else:
+        t1 = None
+
     msg = await callback.message.edit_text(
         text='Выберите',
         reply_markup=request_choice()
     )
     await state.set_state(RequestForm.choice)
-    await state.update_data(msg=msg.message_id)
+    await state.update_data(msg=msg.message_id, type_cert=type_cert(info, t1))
 
 @router.callback_query(F.data.startswith('choice_request'), RequestForm.choice)
 async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
@@ -249,7 +264,7 @@ async def request_three(message: Message, state: FSMContext, bot: Bot):
     )
     data = await state.get_data()
     await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
-    msg = f'Заявка от @{message.from_user.username}\n\n'
+    msg = f'Заявка на {data['type_cert']} от @{message.from_user.username}\n\n'
     msg += f"1. Название организации: {data['name']}\n"
     msg += f"2. Место нахождения и адрес места осуществления деятельности: {data['street']}\n"
     msg += f"3. Телефон: {data['phone']}\n"
