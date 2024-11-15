@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import State, StatesGroup
 from amount.prices import get_amounts
 from administrate.admin_file import *
-from aiogram.types import InputFile
+from aiogram.types import InputFile, FSInputFile
 from documents.document import doc
 
 router = Router()
@@ -148,7 +148,7 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
     data = await state.get_data()
     if action == 'blank':
         await callback.message.answer_document(
-            open(doc, 'rb')
+            FSInputFile(path=doc)
         )
         await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
     else:
