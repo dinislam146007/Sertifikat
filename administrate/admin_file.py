@@ -12,5 +12,3 @@ def get_admins():
 def add_admin(data):
     with open(f'{home}/admins.txt', 'wb') as f:
         pickle.dump(data, f)
-
-

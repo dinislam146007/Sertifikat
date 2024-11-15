@@ -4,9 +4,9 @@ import json
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from basic.handlers import router
+from administrate.admin import router_admin
 from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.client.bot import DefaultBotProperties
-
 
 from config import API_TOKEN
 
@@ -21,6 +21,8 @@ dp = Dispatcher(storage=MemoryStorage())
 
 
 dp.include_router(router)
+dp.include_router(router_admin)
+
 
 async def on_startup():
     logging.info("Бот запущен")
