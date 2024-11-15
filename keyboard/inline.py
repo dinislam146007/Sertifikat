@@ -48,3 +48,22 @@ def trts_inline():
         [InlineKeyboardButton(text='ТРТС 020', callback_data='cert trts')],
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def admin_unine():
+    kb = [
+        [InlineKeyboardButton(text='Изменить цены на сертификацию', callback_data='change_price start')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def change_price_inline():
+    kb = [
+        [InlineKeyboardButton(text='ТРТС 004', callback_data='change_price 0 004'),
+         InlineKeyboardButton(text='ТРТС 010', callback_data='change_price 0 010'),
+         InlineKeyboardButton(text='ТРТС 018', callback_data='change_price 0 018'),
+         InlineKeyboardButton(text='ТРТС 020', callback_data='change_price 0 020')
+         ],
+         [InlineKeyboardButton(text='Декларация ТРТС', callback_data='change_price 1')],
+         [InlineKeyboardButton(text='ГОСТр', callback_data='change_price 2')],
+         [InlineKeyboardButton(text='СГР', callback_data='change_price 3')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
