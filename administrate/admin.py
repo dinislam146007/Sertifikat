@@ -67,7 +67,7 @@ async def new_price(message: Message, state: FSMContext, bot: Bot):
         new_price = int(message.text)
         await bot.delete_message(message_id=data_state['last_msg'], chat_id=message.from_user.id)
         data = get_amounts()
-        data[data_state['type_cert']] = new_price
+        data[data_state['cert']] = new_price
         set_amounts(data)
         await message.answer('Значение изменено!')
     except ValueError:
