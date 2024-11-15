@@ -29,6 +29,10 @@ class SearchState(StatesGroup):
 
 class RequestForm(StatesGroup):
     choice = State()
+    one = State()
+    two = State()
+    three = State()
+    four = State()
     phone = State()
     
 @router.message(Command("start"))
@@ -152,7 +156,133 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
         )
         await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
     else:
-        await callback.message.answer('Введите')
+        text = 'Введите следующие данные (черерз запятую)\n\n'
+        text += "-Название организации\n"
+        text += "-Место нахождения и адрес места осуществления деятельности\n"
+        text += "-Телефон\n"
+        text += "-Факс\n"
+        msg = await callback.message.edit_text(text, reply_markup=close_state)
+        await state.set_state(RequestForm.one)
+        await state.update_data(last_msg=msg.message_id)
+
+
+@router.message(RequestForm.one)
+async def request_one(message: Message, state: FSMContext, bot: Bot):
+    data_text = message.text.split(',')
+    data = await state.get_data()
+    await state.update_data(
+        name=data_text[0],
+        street=data_text[1],
+        phone=data_text[2],
+        faks=data_text[3]
+    )
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+    text = 'Принято! Теперь также через запятую введи: \n\n'
+    text += '-email\n'
+    text += '-ИНН\n'
+    text += '-КПП\n'
+    text += '-ОГРН\n'
+    text += '-Руководитель (должность ФИО)\n'
+    text += '-Дополнительно\n'
+    msg = await message.answer(text, reply_markup=close_state)
+    await state.set_state(RequestForm.two)
+    await state.update_data(last_msg=msg.message_id)
+
+
+@router.message(RequestForm.two)
+async def request_two(message: Message, state: FSMContext, bot: Bot):
+    data_text = message.text.split(',')
+    data = await state.get_data()
+    await state.update_data(
+        email=data_text[0],
+        inn=data_text[1],
+        kpp=data_text[2],
+        ogrn=data_text[3],
+        boss=data_text[4],
+        more=data_text[5]
+    )
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+    text = 'Принято! Теперь также через запятую введи: \n\n'
+    text += '-Наименование продукции\n'
+    text += '-Протокол испытаний ЭЗ\n'
+    text += '-Торговая марка\n'
+    text += '-ОКПД2\n'
+    text += '-ТНВЭД\n'
+    text += '-Контркат\n'
+    text += '-ДУЛ\n'
+    text += '-Количество\n'
+    msg = await message.answer(text, reply_markup=close_state)
+    await state.set_state(RequestForm.three)
+    await state.update_data(last_msg=msg.message_id)
+
+@router.message(RequestForm.three)
+async def request_three(message: Message, state: FSMContext, bot: Bot):
+    data_text = message.text.split(',')
+    data = await state.get_data()
+    await state.update_data(
+        name_prod=data_text[0],
+        trial=data_text[1],
+        mark=data_text[2],
+        okpd2=data_text[3],
+        tnv=data_text[4],
+        kontrkt=data_text[5],
+        dyl=data_text[6],
+        counnt=data_text[7],
+    )
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+    text = 'Принято! Теперь также через запятую введи: \n\n'
+    text += '-Название организации\n'
+    text += '-Адрес места нахождения\n'
+    text += '-Дополнительно\n'
+    msg = await message.answer(text, reply_markup=close_state)
+    await state.set_state(RequestForm.four)
+    await state.update_data(last_msg=msg.message_id)
+
+
+@router.message(RequestForm.four)
+async def request_three(message: Message, state: FSMContext, bot: Bot):
+    data_text = message.text.split(',')
+    await state.update_data(
+        name_org=data_text[0],
+        street_org=data_text[1],
+        more_add=data_text[2],
+    )
+    data = await state.get_data()
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+    msg = f'Заявка от @{message.from_user.username}\n\n'
+    msg += f"1. Название организации: {data['name']}\n"
+    msg += f"2. Место нахождения и адрес места осуществления деятельности: {data['street']}\n"
+    msg += f"3. Телефон: {data['phone']}\n"
+    msg += f"4. Факс: {data['faks']}\n"
+    msg += f"5. Email: {data['email']}\n"
+    msg += f"6. ИНН: {data['inn']}\n"
+    msg += f"7. КПП: {data['kpp']}\n"
+    msg += f"8. ОГРН: {data['ogrn']}\n"
+    msg += f"9. Руководитель (должность ФИО): {data['boss']}\n"
+    msg += f"10. Дополнительно: {data['more']}\n"
+    msg += f"11. Наименование продукции: {data['name_prod']}\n"
+    msg += f"12. Протокол испытаний ЭЗ: {data['trial']}\n"
+    msg += f"13. Торговая марка: {data['mark']}\n"
+    msg += f"14. ОКПД2: {data['okpd2']}\n"
+    msg += f"15. ТНВЭД: {data['tnv']}\n"
+    msg += f"16. Контракт: {data['kontrkt']}\n"
+    msg += f"17. ДУЛ: {data['dyl']}\n"
+    msg += f"18. Количество: {data['counnt']}\n"
+    msg += f"19. Название организации: {data['name_org']}\n"
+    msg += f"20. Адрес места нахождения: {data['street_org']}\n"
+    msg += f"21. Дополнительно: {data['more_add']}\n"
+    await  bot.send_message(
+        text=msg,
+        chat_id=6634277726
+    )
+    text = 'Заявка отправлена! '
+    msg = await message.answer(text)
+
+    await state.clear()
+
+
+    
+
 
 
 @router.message(RequestForm.phone)
