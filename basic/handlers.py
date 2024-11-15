@@ -161,7 +161,7 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
         text += "-Место нахождения и адрес места осуществления деятельности\n"
         text += "-Телефон\n"
         text += "-Факс\n"
-        msg = await callback.message.edit_text(text, reply_markup=close_state)
+        msg = await callback.message.edit_text(text, reply_markup=close_state_inline())
         await state.set_state(RequestForm.one)
         await state.update_data(last_msg=msg.message_id)
 
