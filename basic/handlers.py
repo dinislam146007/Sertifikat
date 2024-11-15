@@ -147,10 +147,8 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
     action = callback.data.split()[1]
     data = await state.get_data()
     if action == 'blank':
-        await callback.message.answer(f'{doc}')
-        await bot.send_document(
-            callback.from_user.id,
-            ('Заявка.docx', doc)
+        await callback.message.reply_document(
+            open(doc, 'rb')
         )
         await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
     else:
