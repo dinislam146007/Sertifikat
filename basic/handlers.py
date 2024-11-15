@@ -184,7 +184,7 @@ async def request_one(message: Message, state: FSMContext, bot: Bot):
     text += '-ОГРН\n'
     text += '-Руководитель (должность ФИО)\n'
     text += '-Дополнительно\n'
-    msg = await message.answer(text, reply_markup=close_state)
+    msg = await message.answer(text, reply_markup=close_state_inline())
     await state.set_state(RequestForm.two)
     await state.update_data(last_msg=msg.message_id)
 
@@ -211,7 +211,7 @@ async def request_two(message: Message, state: FSMContext, bot: Bot):
     text += '-Контркат\n'
     text += '-ДУЛ\n'
     text += '-Количество\n'
-    msg = await message.answer(text, reply_markup=close_state)
+    msg = await message.answer(text, reply_markup=close_state_inline())
     await state.set_state(RequestForm.three)
     await state.update_data(last_msg=msg.message_id)
 
@@ -234,7 +234,7 @@ async def request_three(message: Message, state: FSMContext, bot: Bot):
     text += '-Название организации\n'
     text += '-Адрес места нахождения\n'
     text += '-Дополнительно\n'
-    msg = await message.answer(text, reply_markup=close_state)
+    msg = await message.answer(text, reply_markup=close_state_inline())
     await state.set_state(RequestForm.four)
     await state.update_data(last_msg=msg.message_id)
 
