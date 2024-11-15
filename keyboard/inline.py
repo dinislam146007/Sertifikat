@@ -73,7 +73,8 @@ def change_price_inline():
 
 def request_choice():
     kb = [
-        [InlineKeyboardButton(text='Скачать бланк', callback_data='choice_request blank'),
+        [
+            InlineKeyboardButton(text='Скачать бланк', callback_data='choice_request blank'),
          InlineKeyboardButton(text='Заполнить сейчас', callback_data='choice_request now')
          ],
          [InlineKeyboardButton(text='Отмена', callback_data='close_state')]
