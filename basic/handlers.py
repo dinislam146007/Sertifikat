@@ -6,6 +6,7 @@ from keyboard.inline import *
 from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import State, StatesGroup
 from amount.prices import get_amounts
+from administrate.admin_file import *
 
 
 router = Router()
@@ -30,9 +31,13 @@ class RequestForm(StatesGroup):
     
 @router.message(Command("start"))
 async def send_welcome(message: Message):
+    if message.from_user.id in get_admins():
+        admin = True
+    else:
+        admin = False
     await message.answer(
         text="Привет",
-        reply_markup=start_inline()  
+        reply_markup=start_inline(admin=admin)  
     )
                         
 @router.callback_query(F.data == 'close_state')
