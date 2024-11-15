@@ -52,7 +52,7 @@ def trts_inline():
 def admin_unine():
     kb = [
         [InlineKeyboardButton(text='Изменить цены на сертификацию', callback_data='change_price start')],
-        [InlineKeyboardButton(text='Назад', callback_data='start')],
+        [InlineKeyboardButton(text='Назад', callback_data='close_state')],
 
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
