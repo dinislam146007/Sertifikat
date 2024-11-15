@@ -8,7 +8,7 @@ from aiogram.filters.state import State, StatesGroup
 from amount.prices import get_amounts
 from administrate.admin_file import *
 from aiogram.types import InputFile
-
+from documents.document import doc
 
 router = Router()
 
@@ -149,7 +149,7 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
     if action == 'blank':
         await bot.send_document(
             callback.from_user.id,
-            open('documents/doc.docx', 'rb')
+            open(f'{doc}', 'rb')
         )
         await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
     else:
