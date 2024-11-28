@@ -87,7 +87,7 @@ async def search(callback: CallbackQuery, state: FSMContext):
     # text += '<i>Зарядка >> устройства для зарядки</i>'
     msg = await callback.message.edit_text(
         text=get_search(),
-        reply_markup=close_state_inline()
+        reply_markup=search_answer_inline()
     )
     await state.set_state(SearchState.text)
     await state.update_data(msg=msg.message_id)
