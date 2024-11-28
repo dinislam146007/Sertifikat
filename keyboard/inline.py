@@ -68,10 +68,20 @@ def trts_inline():
 def admin_unine():
     kb = [
         [InlineKeyboardButton(text='Изменить цены на сертификацию', callback_data='change_price start')],
+        [InlineKeyboardButton(text='Изменить сообщение', callback_data='edit_mes start')],
         [InlineKeyboardButton(text='Назад', callback_data='close_state')],
-
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
+
+
+def edit_mes_inline():
+    kb = [
+        [InlineKeyboardButton(text='Сообщение услуг', callback_data='edit_mes services')],
+        [InlineKeyboardButton(text='Сообщение информации', callback_data='edit_mes inf')],
+        [InlineKeyboardButton(text='Назад', callback_data='admin')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
 
 def change_price_inline():
     kb = [

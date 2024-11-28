@@ -1,16 +1,22 @@
 from aiogram import Router, F, Bot
-from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
+from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 from keyboard.inline import *
 from aiogram.fsm.context import FSMContext
 from aiogram.filters.state import State, StatesGroup
 from amount.prices import *
+import asyncio
+from messages.message import *
 
 router_admin = Router()
 
 
 class EditPrice(StatesGroup):
     new_price = State()
+
+class EditMessage(StatesGroup):
+    new_mes = State()
+
 
 def type_cert(t, t1):
     if t == '0':
@@ -28,6 +34,38 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
         text='Админ', 
         reply_markup=admin_unine()
     )
+
+@router_admin.callback_query(F.data.startswith('edit_mes'))
+async def edit_mes(callback: CallbackQuery, state: FSMContext):
+    action = callback.data.split()[1]
+    if action == 'start':
+        await callback.message.edit_text(
+            text='Изменить:',
+            reply_markup=edit_mes_inline()
+        )
+    else:
+        msg = await callback.message.edit_text(
+            text='Отправьте новое сообщение:',
+            reply_markup=close_state_inline()
+        ) 
+        await state.set_state(EditMessage.new_mes)
+        await state.update_data(
+            last_msg=msg.message_id,
+            action=action
+        )
+
+
+@router_admin.message(EditMessage.new_mes)
+async def new_edit_mes(message: Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+    if data['action'] == 'services':
+        set_services(message.text)
+    else:
+        set_inf(message.text)
+    msg = await message.answer('Сообщение обновлено')
+    await asyncio.sleep(5)
+    await msg.delete()
 
 
 @router_admin.callback_query(F.data.startswith('change_price'))
