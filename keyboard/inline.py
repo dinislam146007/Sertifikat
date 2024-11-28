@@ -6,7 +6,7 @@ def start_inline(admin=False):
         [InlineKeyboardButton(text='🔎 Проверить стоимость по названию', callback_data='search')],
         [InlineKeyboardButton(text='📑 Все наши услуги', callback_data='services')],
         [InlineKeyboardButton(text='⁉️ Проконсультироваться с экспертом', url='https://t.me/Nastia_NZ')],
-        [InlineKeyboardButton(text='⚠️ Важная и полезная информация', callback_data='skip')],
+        [InlineKeyboardButton(text='⚠️ Важная и полезная информация', callback_data='inf')],
         [InlineKeyboardButton(text='📞 Наши контакты', url='https://t.me/Nastia_NZ')]
     ]
     if admin:

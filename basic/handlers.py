@@ -188,6 +188,17 @@ async def services(callback: CallbackQuery):
         text=f'{get_services()}',
         reply_markup=services_inline()
     )
+
+
+@router.callback_query(F.data == 'inf')
+async def services(callback: CallbackQuery):
+    await callback.message.edit_text(
+        text=f'{get_inf()}',
+        reply_markup=close_state_inline()
+    )
+
+
+
 @router.callback_query(F.data.startswith('choice_request'), RequestForm.choice)
 async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
     action = callback.data.split()[1]
