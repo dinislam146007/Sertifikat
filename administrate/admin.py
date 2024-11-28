@@ -63,9 +63,11 @@ async def new_edit_mes(message: Message, state: FSMContext, bot: Bot):
     data = await state.get_data()
     await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
     if data['action'] == 'services':
-        set_services(message.text)
+        set_services(message.html_text)
+    elif data['action'] == 'search':
+        set_search(message.html_text)
     else:
-        set_inf(message.text)
+        set_inf(message.html_text)
     msg = await message.answer('Сообщение обновлено')
     await asyncio.sleep(5)
     await msg.delete()

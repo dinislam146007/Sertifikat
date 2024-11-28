@@ -79,6 +79,7 @@ def edit_mes_inline():
     kb = [
         [InlineKeyboardButton(text='Сообщение услуг', callback_data='edit_mes services')],
         [InlineKeyboardButton(text='Сообщение информации', callback_data='edit_mes inf')],
+        [InlineKeyboardButton(text='Сообщение поиска', callback_data='edit_mes search')],
         [InlineKeyboardButton(text='Назад', callback_data='admin')]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

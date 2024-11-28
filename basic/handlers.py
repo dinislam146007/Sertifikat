@@ -55,7 +55,7 @@ async def send_welcome(message: Message):
         admin = False
     if not get_user(message.from_user.id):
         set_user(message.from_user.id, message.from_user.username)
-        
+
     await message.answer(
         text="Привет",
         reply_markup=start_inline(admin=admin)  
@@ -81,12 +81,12 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == 'search')
 async def search(callback: CallbackQuery, state: FSMContext):
-    text = 'Укажите тип вашей продукции во множественном числе, например:\n'
-    text += '<i>Шампунь >> шампуни</i>\n'
-    text += '<i>Микроволновки >> печи микроволновые</i>\n'
-    text += '<i>Зарядка >> устройства для зарядки</i>'
+    # text = 'Укажите тип вашей продукции во множественном числе, например:\n'
+    # text += '<i>Шампунь >> шампуни</i>\n'
+    # text += '<i>Микроволновки >> печи микроволновые</i>\n'
+    # text += '<i>Зарядка >> устройства для зарядки</i>'
     msg = await callback.message.edit_text(
-        text=text,
+        text=get_search(),
         reply_markup=close_state_inline()
     )
     await state.set_state(SearchState.text)
