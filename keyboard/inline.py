@@ -23,7 +23,7 @@ def services_inline():
         [InlineKeyboardButton(text='Сертификат ГОСТр', callback_data='cert 2'),
         InlineKeyboardButton(text='СГР', callback_data='cert 3')],
         [InlineKeyboardButton(text='Связь с менежером', url='https://t.me/Nastia_NZ')],
-        [InlineKeyboardButton(text='Назад', callback_data='start')]
+        [InlineKeyboardButton(text='Назад', callback_data='close_state')]
     ]
     # if admin:
     #     kb.append(
