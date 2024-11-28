@@ -46,6 +46,8 @@ class RequestForm(StatesGroup):
     three = State()
     four = State()
     phone = State()
+    address = State()
+    name = State()
     
 @router.message(Command("start"))
 async def send_welcome(message: Message):
@@ -204,7 +206,7 @@ async def services(callback: CallbackQuery):
 
 
 @router.callback_query(F.data.startswith('choice_request'), RequestForm.choice)
-async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
+async def choice_request(callback: CallbackQuery, state: FSMContext, bot: Bot):
     action = callback.data.split()[1]
     data = await state.get_data()
     if action == 'blank':
@@ -213,25 +215,47 @@ async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
         )
         await bot.delete_message(message_id=data['msg'], chat_id=callback.from_user.id)
     else:
-        text = 'Введите следующие данные (черерз запятую)\n\n'
-        text += "-Название организации\n"
-        text += "-Место нахождения и адрес места осуществления деятельности\n"
-        text += "-Телефон\n"
-        text += "-Факс\n"
+        text = "Введите название организации:"
         msg = await callback.message.edit_text(text, reply_markup=close_state_inline())
-        await state.set_state(RequestForm.one)
+        await state.set_state(RequestForm.name)
         await state.update_data(last_msg=msg.message_id)
 
 
+@router.message(RequestForm.name)
+async def request_name(message: Message, state: FSMContext, bot: Bot):
+    # Сохранение названия организации
+    await state.update_data(name=message.text)
+    data = await state.get_data()
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+
+    # Запрос следующего поля
+    text = "Введите место нахождения и адрес места осуществления деятельности:"
+    msg = await message.answer(text, reply_markup=close_state_inline())
+    await state.set_state(RequestForm.address)
+    await state.update_data(last_msg=msg.message_id)
+
+
+@router.message(RequestForm.address)
+async def request_address(message: Message, state: FSMContext, bot: Bot):
+    # Сохранение адреса
+    await state.update_data(address=message.text)
+    data = await state.get_data()
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+
+    # Запрос следующего поля
+    text = "Введите телефон:"
+    msg = await message.answer(text, reply_markup=close_state_inline())
+    await state.set_state(RequestForm.one)
+    await state.update_data(last_msg=msg.message_id)
+
+
+    
+
 @router.message(RequestForm.one)
 async def request_one(message: Message, state: FSMContext, bot: Bot):
-    data_text = message.text.split(',')
     data = await state.get_data()
     await state.update_data(
-        name=data_text[0],
-        street=data_text[1],
-        phone=data_text[2],
-        faks=data_text[3]
+        phone=message.text,
     )
     await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
     text = 'Принято! Теперь также через запятую введи: \n\n'
@@ -311,7 +335,6 @@ async def request_three(message: Message, state: FSMContext, bot: Bot):
     msg += f"1. Название организации: {data['name']}\n"
     msg += f"2. Место нахождения и адрес места осуществления деятельности: {data['street']}\n"
     msg += f"3. Телефон: {data['phone']}\n"
-    msg += f"4. Факс: {data['faks']}\n"
     msg += f"5. Email: {data['email']}\n"
     msg += f"6. ИНН: {data['inn']}\n"
     msg += f"7. КПП: {data['kpp']}\n"
