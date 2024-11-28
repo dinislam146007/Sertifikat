@@ -86,6 +86,7 @@ async def newslet(message: Message, state: FSMContext, bot: Bot):
 
     users = get_all_user()
     msg = await message.answer(text=f'Ожидайте, рассылка будет проведена спустя {len(users) * 2}')
+    await message.answer(f"{users}")
     for user in users:
         try:
             await bot.send_message(
