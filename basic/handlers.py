@@ -238,7 +238,7 @@ async def request_name(message: Message, state: FSMContext, bot: Bot):
 @router.message(RequestForm.address)
 async def request_address(message: Message, state: FSMContext, bot: Bot):
     # Сохранение адреса
-    await state.update_data(address=message.text)
+    await state.update_data(street=message.text)
     data = await state.get_data()
     await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
 
