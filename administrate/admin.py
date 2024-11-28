@@ -89,6 +89,7 @@ async def newslet(message: Message, state: FSMContext, bot: Bot):
     for user in users:
         try:
             await bot.send_message(
+                chat_id=user,
                 text=message.text
             )
             await asyncio.sleep(2)
