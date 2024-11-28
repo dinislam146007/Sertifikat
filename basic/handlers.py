@@ -116,31 +116,43 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
 @router.callback_query(F.data.startswith('cert'))
 async def cert(callback: CallbackQuery):
     cert_info = int(callback.data.split()[1])
-
+    data = get_amounts()
     if cert_info == 0:
         trts_type = callback.data.split()[2]
         if int(trts_type) == 0:
             text = 'Сертификат ТРТС'
-            msg = 'Выберите тип сертификата:'
+            msg = 'Выберите нужный регламент:'
             trts_type = None
         else:
             text = f'ТРТС {trts_type}'
-            msg = None
+            # msg = None
     elif cert_info == 1:
         trts_type = None
-        text = 'Декларация ТРТС'
-        msg = None
+        text = "Декларация ТРТС"
+        msg = f"{text}\n"
+        msg += f"Цена: {data[f'{text}']}\n"
+        msg += "Оформление 2 дня\n"
+        msg += "Срок действия 5 лет"
+        # msg = None
     elif cert_info == 2:
         trts_type = None
         text = 'ГОСТр'
-        msg = None
+        msg = f"Сертификат {text}\n"
+        msg += f"Цена: {data[f'{text}']}\n"
+        msg += "Оформление 2 дня\n"
+        msg += f"Срок действия 3 года\n"
+        msg += f"Протокол испытаний в подарок"
+        # msg = None
     else:
         trts_type = None
         text = 'СГР'
-        msg = None
+        msg = f"Свидетельство Государственной Регистрации\n"
+        msg += f"Цена: {data[f'{text}']}\n"
+        msg += "Оформление до 10 недель\n"
+        msg += "Выдаётся Бессрочно"
+        # msg = None
     if not msg:
-        data = get_amounts()
-        msg = f"Сертификат: {text} \n Цена: {data[f'{text}']}"
+        msg = f"Сертификат: {text} \nЦена: {data[f'{text}']}"
     await callback.message.edit_text(
         text=msg,
         reply_markup=cert_inline(cert_info, trts_type)
