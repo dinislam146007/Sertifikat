@@ -125,7 +125,7 @@ async def cert(callback: CallbackQuery):
             trts_type = None
         else:
             text = f'ТРТС {trts_type}'
-            # msg = None
+            msg = None
     elif cert_info == 1:
         trts_type = None
         text = "Декларация ТРТС"
