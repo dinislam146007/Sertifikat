@@ -151,7 +151,7 @@ async def cert(callback: CallbackQuery):
         msg += "Оформление до 10 недель\n"
         msg += "Выдаётся Бессрочно"
         # msg = None
-    if not msg:
+    if msg is None:
         msg = f"Сертификат: {text} \nЦена: {data[f'{text}']}"
     await callback.message.edit_text(
         text=msg,
