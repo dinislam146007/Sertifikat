@@ -30,8 +30,9 @@ def get_all_user():
     cursor.execute("""
     SELECT user_id FROM users
     """)
-    row = cursor.fetchall()
-    return row
+    rows = cursor.fetchall()  # rows = [(1,), (2,), (3,), ...]
+    user_ids = [row[0] for row in rows]  # Извлекаем user_id из каждого кортежа
+    return user_ids
 
 def get_user(user_id):
     cursor.execute("""
