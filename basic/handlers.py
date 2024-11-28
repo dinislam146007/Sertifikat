@@ -63,9 +63,14 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
         await state.clear()
     except Exception:
         pass
+    if callback.from_user.id in get_admins():
+        admin = True
+    else:
+        admin = False
+
     await callback.message.edit_text(
         text="Привет",
-        reply_markup=start_inline()  
+        reply_markup=start_inline(admin)  
     )
 
 
