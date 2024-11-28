@@ -136,6 +136,7 @@ async def cert(callback: CallbackQuery):
         msg += "Оформление 2 дня\n"
         msg += "Срок действия 5 лет"
         # msg = None
+    
     elif cert_info == 2:
         trts_type = None
         text = 'ГОСТр'
@@ -175,6 +176,12 @@ async def request(callback: CallbackQuery, state: FSMContext):
     await state.set_state(RequestForm.choice)
     await state.update_data(msg=msg.message_id, type_cert=type_cert(info, t1))
 
+@router.callback_query(F.data == 'services')
+async def services(callback: CallbackQuery):
+    await callback.message.edit_text(
+        text='Меню поиска',
+        reply_markup=services_inline()
+    )
 @router.callback_query(F.data.startswith('choice_request'), RequestForm.choice)
 async def choice_request(callback: CallbackQuery, state: FSMContext,bot: Bot):
     action = callback.data.split()[1]

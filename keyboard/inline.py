@@ -1,18 +1,34 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+
 def start_inline(admin=False):
-    kb = [
-        [InlineKeyboardButton(text='Проверить продукцию', callback_data='search')],
-        [InlineKeyboardButton(text='Сертификат ТРТС', callback_data='cert 0 0'),
-        InlineKeyboardButton(text='Декларация ТРТС', callback_data='cert 1')],
-        [InlineKeyboardButton(text='Сертификат ГОСТр', callback_data='cert 2'),
-        InlineKeyboardButton(text='СГР', callback_data='cert 3')],
-        [InlineKeyboardButton(text='Связь с менежером', url='https://t.me/Nastia_NZ')]
+    kb =[
+        [InlineKeyboardButton(text='🔎 Проверить стоимость по названию', callback_data='search')],
+        [InlineKeyboardButton(text='📑 Все наши услуги', callback_data='services')],
+        [InlineKeyboardButton(text='⁉️ Проконсультироваться с экспертом', url='https://t.me/Nastia_NZ')],
+        [InlineKeyboardButton(text='⚠️ Важная и полезная информация', callback_data='skip')],
+        [InlineKeyboardButton(text='📞 Наши контакты', url='https://t.me/Nastia_NZ')]
     ]
     if admin:
         kb.append(
             [InlineKeyboardButton(text='Администратору', callback_data='admin')]
         )
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def services_inline():
+    kb = [
+        [InlineKeyboardButton(text='🔎 Проверить стоимость по названию', callback_data='search')],
+        [InlineKeyboardButton(text='Сертификат ТРТС', callback_data='cert 0 0'),
+        InlineKeyboardButton(text='Декларация ТРТС', callback_data='cert 1')],
+        [InlineKeyboardButton(text='Сертификат ГОСТр', callback_data='cert 2'),
+        InlineKeyboardButton(text='СГР', callback_data='cert 3')],
+        [InlineKeyboardButton(text='Связь с менежером', url='https://t.me/Nastia_NZ')],
+        [InlineKeyboardButton(text='Назад', callback_data='start')]
+    ]
+    # if admin:
+    #     kb.append(
+    #         [InlineKeyboardButton(text='Администратору', callback_data='admin')]
+    #     )
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 def close_state_inline():
