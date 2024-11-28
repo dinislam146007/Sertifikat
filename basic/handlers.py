@@ -9,6 +9,7 @@ from amount.prices import get_amounts
 from administrate.admin_file import *
 from aiogram.types import InputFile, FSInputFile
 from documents.document import doc
+from messages.message import *
 
 router = Router()
 
@@ -184,7 +185,7 @@ async def request(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(F.data == 'services')
 async def services(callback: CallbackQuery):
     await callback.message.edit_text(
-        text='Меню поиска',
+        text=f'{get_services()}',
         reply_markup=services_inline()
     )
 @router.callback_query(F.data.startswith('choice_request'), RequestForm.choice)
