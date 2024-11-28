@@ -117,8 +117,8 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
 async def cert(callback: CallbackQuery):
     cert_info = int(callback.data.split()[1])
     data = get_amounts()
-    await callback.message.answer(f"{callback.data}")
-    msg = f"Произошла ошибка, сертификат не найден. {callback.data}"  # Значение по умолчанию
+    # await callback.message.answer(f"{callback.data}")
+    # msg = f"Произошла ошибка, сертификат не найден. {callback.data}"  # Значение по умолчанию
     if cert_info == 0:
         trts_type = callback.data.split()[2]
         if int(trts_type) == 0:
