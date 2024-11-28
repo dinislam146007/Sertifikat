@@ -7,9 +7,12 @@ from aiogram.filters.state import State, StatesGroup
 from amount.prices import *
 import asyncio
 from messages.message import *
+from db.db import *
 
 router_admin = Router()
 
+class Newsletter(StatesGroup):
+    message = State()
 
 class EditPrice(StatesGroup):
     new_price = State()
@@ -66,6 +69,33 @@ async def new_edit_mes(message: Message, state: FSMContext, bot: Bot):
     msg = await message.answer('Сообщение обновлено')
     await asyncio.sleep(5)
     await msg.delete()
+
+@router_admin.callback_query(F.data == 'newsletter')
+async def newsletter(callback: CallbackQuery, state: FSMContext):
+    msg = await callback.message.edit_text(
+        text='Введите текст рассылки',
+        reply_markup=close_state_inline()
+    )
+    await state.set_state(Newsletter.message)
+    await state.update_data(last_msg=msg.message_id)
+
+@router_admin.message(Newsletter.message)
+async def newslet(message: Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
+
+    users = get_all_user()
+    msg = await message.answer(text=f'Ожидайте, рассылка будет проведена спустя {len(users) * 2}')
+    for user in users:
+        try:
+            await bot.send_message(
+                text=message.text
+            )
+            await asyncio.sleep(2)
+        except Exception:
+            pass
+    await msg.delete()
+    await message.answer('Рассылка проведена успешно!')
 
 
 @router_admin.callback_query(F.data.startswith('change_price'))

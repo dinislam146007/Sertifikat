@@ -69,6 +69,7 @@ def admin_unine():
     kb = [
         [InlineKeyboardButton(text='Изменить цены на сертификацию', callback_data='change_price start')],
         [InlineKeyboardButton(text='Изменить сообщение', callback_data='edit_mes start')],
+        [InlineKeyboardButton(text='Запустить рассылку', callback_data='newsletter')],
         [InlineKeyboardButton(text='Назад', callback_data='close_state')],
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

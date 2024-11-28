@@ -10,6 +10,7 @@ from administrate.admin_file import *
 from aiogram.types import InputFile, FSInputFile
 from documents.document import doc
 from messages.message import *
+from db.db import *
 
 router = Router()
 
@@ -52,6 +53,9 @@ async def send_welcome(message: Message):
         admin = True
     else:
         admin = False
+    if not get_user(message.from_user.id):
+        set_user(message.from_user.id, message.from_user.username)
+        
     await message.answer(
         text="Привет",
         reply_markup=start_inline(admin=admin)  
