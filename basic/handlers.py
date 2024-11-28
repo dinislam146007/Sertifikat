@@ -117,9 +117,9 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
         await message.answer(msg, reply_markup=keyboard)
     else:
         msg = "Тип сертификата для этого товара не найден"
-        await message.answer(\
+        await message.answer(
             text=msg,
-            reply_markup=close_state_inline())
+            reply_markup=search_answer_inline())
     await state.clear()
 
 
