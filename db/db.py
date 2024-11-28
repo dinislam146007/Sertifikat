@@ -9,7 +9,7 @@ cursor = conn.cursor()
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER,
-    username TEXT,
+    username TEXT
 )
 """)
 
@@ -52,8 +52,8 @@ def set_user(user_id, username):
 
 def get_all_user():
     cursor.execute("""
-    SELECT user_id FROM users WHERE 
-    """, ())  # Добавляем запятую для формирования кортежа
+    SELECT user_id FROM users 
+    """)  # Добавляем запятую для формирования кортежа
     row = cursor.fetchall()
     return row
 
