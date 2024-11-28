@@ -83,11 +83,10 @@ async def newsletter(callback: CallbackQuery, state: FSMContext):
 async def newslet(message: Message, state: FSMContext, bot: Bot):
     data = await state.get_data()
     await bot.delete_message(chat_id=message.from_user.id, message_id=data['last_msg'])
-
     users = get_all_user()
     msg = await message.answer(text=f'Ожидайте, рассылка будет проведена спустя {len(users) * 2}')
     for user in users:
-        await message.answer(f"{user}")
+        # await message.answer(f"{user}")
         try:
             await bot.send_message(
                 chat_id=user,
@@ -98,7 +97,7 @@ async def newslet(message: Message, state: FSMContext, bot: Bot):
             pass
     await msg.delete()
     await message.answer('Рассылка проведена успешно!')
-    await message.answer(f"Users: {users}")
+    # await message.answer(f"Users: {users}")
 
 
 @router_admin.callback_query(F.data.startswith('change_price'))
