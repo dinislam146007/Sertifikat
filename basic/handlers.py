@@ -125,7 +125,7 @@ async def cert(callback: CallbackQuery):
             trts_type = None
         else:
             text = f'ТРТС {trts_type}'
-            msg = None
+            msg = f"Сертификат: {text} \nЦена: {data[f'{text}']}"
     elif cert_info == 1:
         trts_type = None
         text = "Декларация ТРТС"
@@ -151,8 +151,8 @@ async def cert(callback: CallbackQuery):
         msg += "Оформление до 10 недель\n"
         msg += "Выдаётся Бессрочно"
         # msg = None
-    if msg is None:
-        msg = f"Сертификат: {text} \nЦена: {data[f'{text}']}"
+    # if msg is None:
+    #     msg = f"Сертификат: {text} \nЦена: {data[f'{text}']}"
     await callback.message.edit_text(
         text=msg,
         reply_markup=cert_inline(cert_info, trts_type)
