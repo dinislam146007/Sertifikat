@@ -108,3 +108,11 @@ def request_choice():
          [InlineKeyboardButton(text='Отмена', callback_data='close_state')]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def search_answer_inline():
+    kb = [
+        [InlineKeyboardButton(text='Уточнить у менеджера', url='https://t.me/Nastia_NZ')],
+        [InlineKeyboardButton(text='Попробовать ввести ещё раз', callback_data='search')],
+        [InlineKeyboardButton(text='Назад', callback_data='close_state')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
