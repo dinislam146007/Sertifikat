@@ -6,7 +6,7 @@ conn = sqlite3.connect("sertifikat.db")
 cursor = conn.cursor()
 
 # Удаление старой таблицы (если она существует)
-cursor.execute("DROP TABLE IF EXISTS users")
+# cursor.execute("DROP TABLE IF EXISTS users")
 
 # Создание таблицы
 cursor.execute("""
@@ -37,5 +37,5 @@ def get_user(user_id):
     cursor.execute("""
     SELECT * FROM users WHERE user_id=?
     """, (user_id,))
-    row = cursor.fetchone()
+    row = cursor.fetchmany()
     return row
