@@ -114,6 +114,8 @@ async def search_state(message: Message, state: FSMContext, bot: Bot):
             key.append([
                 InlineKeyboardButton(text=cert, callback_data=f"cert {c[0]} {c[1]}")
             ])
+        key.append([InlineKeyboardButton(text='Уточнить у менеджера', url='https://t.me/Nastia_NZ')])
+        key.append([InlineKeyboardButton(text='Попробовать ввести ещё раз', callback_data='search')])
         keyboard = InlineKeyboardMarkup(inline_keyboard=key)
 
         await message.answer(msg, reply_markup=keyboard)
