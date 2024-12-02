@@ -66,6 +66,8 @@ async def new_edit_mes(message: Message, state: FSMContext, bot: Bot):
         set_services(message.html_text)
     elif data['action'] == 'search':
         set_search(message.html_text)
+    elif data['action'] == 'start_m':
+        set_start_mes(message.html_text)
     else:
         set_inf(message.html_text)
     msg = await message.answer('Сообщение обновлено')

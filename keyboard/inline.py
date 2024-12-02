@@ -77,6 +77,7 @@ def admin_unine():
 
 def edit_mes_inline():
     kb = [
+        [InlineKeyboardButton(text='Стартовое сообщение', callback_data='edit_mes start_m')],
         [InlineKeyboardButton(text='Сообщение услуг', callback_data='edit_mes services')],
         [InlineKeyboardButton(text='Сообщение информации', callback_data='edit_mes inf')],
         [InlineKeyboardButton(text='Сообщение поиска', callback_data='edit_mes search')],

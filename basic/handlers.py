@@ -59,7 +59,7 @@ async def send_welcome(message: Message):
         set_user(message.from_user.id, message.from_user.username)
 
     await message.answer(
-        text="Привет",
+        text=get_start_mes(),
         reply_markup=start_inline(admin=admin)  
     )
                         

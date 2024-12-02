@@ -30,3 +30,13 @@ def get_search() -> int:
 def set_search(new_services):
     with open(f"{home}/search.txt", "w", encoding="utf-8") as f:
         f.write(new_services)
+
+
+def get_start_mes() -> int:
+    with open(f"{home}/start_mes.txt", "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def set_start_mes(new_services):
+    with open(f"{home}/start_mes.txt", "w", encoding="utf-8") as f:
+        f.write(new_services)
