@@ -66,7 +66,7 @@ async def sh_requests(callback: CallbackQuery):
     msg += f"20. Адрес места нахождения: {data['street_org']}\n"
     msg += f"21. Дополнительно: {data['more_add']}\n"
     await callback.message.edit_text(
-        text=f"{forms}",
+        text=msg,
         reply_markup=requests_inline(n)
     )
 
