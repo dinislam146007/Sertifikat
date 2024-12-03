@@ -8,3 +8,4 @@ messages/
 messages/services.txt
 sertifikat.db
 messages/search.txt
+db/cred.json
