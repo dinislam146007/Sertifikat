@@ -1,11 +1,14 @@
 import gspread
 from db.db import *
 from google.oauth2.service_account import Credentials
+import os
+
+home = os.path.dirname(__file__)
 
 # Авторизация с помощью сервисного аккаунта
 def authenticate_google_sheets():
     creds = Credentials.from_service_account_file(
-        'cred.json',  # Путь к вашему credentials.json
+        f'{home}/cred.json',  # Путь к вашему credentials.json
         scopes=["https://www.googleapis.com/auth/spreadsheets"]
     )
     client = gspread.authorize(creds)
