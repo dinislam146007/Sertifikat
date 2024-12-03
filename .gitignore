@@ -1,9 +1,10 @@
 venv/
+messages/
 __pycache__/
 *.pyc
 *.txt
 start_mes.txt
-messages/inf.txt
+messages/
 messages/services.txt
 sertifikat.db
 messages/search.txt
