@@ -38,6 +38,13 @@ def close_state_inline():
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 
+def back_admin():
+    kb = [
+        [InlineKeyboardButton(text='Назад', callback_data='admin')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+
 def cert_inline(type_cert, trts_type):
     kb = [
     ]
@@ -71,6 +78,7 @@ def admin_unine():
         [InlineKeyboardButton(text='Изменить сообщение', callback_data='edit_mes start')],
         [InlineKeyboardButton(text='Запустить рассылку', callback_data='newsletter')],
         [InlineKeyboardButton(text='Заявки', callback_data='sh_requests 0')],
+        [InlineKeyboardButton(text='Таблица заявок', callback_data='sheets')],
         [InlineKeyboardButton(text='Назад', callback_data='close_state')],
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "braided-analyst-427209-f3",
+    "private_key_id": "223ca63ececf9e0cdf776aa598cf6bd585989650",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCe7FlRLrfQrwGX\n0JNPZP+2pC53T7pImODwwDqBOAtn9xR7sXGhbd90J2y+wDdE3Nvd1ZFwG4oAcFP1\nopg+Gtif/KQyJ7vZ78q8uCioWOHfEoQrAq5+FSZE5uDUf8rR1HwWiQkOvzcJ4Mcs\nX4O1Ilig+Tb3K0Isu9mr4shaQQ0gGY7X0aTAdPlp8xJCNPQz+f2LsCqt98xMyhhJ\nR0z+2gU2D04iitG1RwxQ9CyuwWJz+7C3PmkZINgjNgc6Ihv7q4hErPtNJz3K9KH0\n+sX8ocwQuM5ZukKHXne1suTYwI0GbyGfkNhiZgAxyZlfEdyJCSh9LZPMnlTawzxm\ncMjYYl4XAgMBAAECggEAAdqW9iP53/TSq28y8LeoZfyHUDv9W9Bwu046wHwjYeyX\ncBPzU+NAuo2lLpp2apa6990Aa9Lear/kstZZOUw936vmTHF7NwEdl9L8Im6a/+uq\n4AeReoYLor0gvUnaV1VHt0mU8feYEETvfdyFYE0MxJ/znLGD/ZqZYPBtzuO4X/n3\no8+0tYMobX5tUJtXyix/soBvn6otjqpIlnM1iYaSuNFSVJB4CIqw2plXsGf5cwvr\nkzZNpZY8L2CeUnawMJOgw1h1v/9ffSwu6e5ldfRPg2dWi+fia4xlGkie9VjFJBMP\nWRzMk8/H3HiRdf7wz+D4JCT+OGt0EYvkFGa9meeTxQKBgQDQH0NxFSBYfBLtZIpO\nLm7MH2RDMS41jMBlP5wprnDUAeidPUFXFi2cUMGJFFsmD3kn/7mm9PaDtIcVPTsG\nseKaH4cDauSlPU2l8prKXsMVL2HpDCyUumC18s0cw2orWQXTGOIdpIyLkYCEc0Hr\nQAsr+J4U4bmJHMq6Rfi0FBjxWwKBgQDDe6mnSkQSuwaMqTVQoHyreqab8WKLlbtB\n8ctJ6WeaN/zItXgovqsi4tTzDIga5k/DGwM3C0IDhrEOFq7xXptxazoHIlgy6IJJ\n02QJkDehYKLCD6CoIXAPjmrOn7mr5prkUWP+AuDDvG/yvnjGpqiXL0s6zYkMXreA\n22F6LjXG9QKBgCq3L/Vmu6PNm2jj6MsRFqaIjuCHmI9fGyHsw1V+uyOYXLDhIKcK\nI0RhAsfqyKZwKJLAFs+gmXQAunTug03ldrfhXqmh59nOUkCMIZ8Fgg64EeVuHTxN\nYIoXkmej6AeLlvlzsv0Yh8whifolWdM56tEUjwWEKrtskGNY9ymmslPfAoGAErYG\ngiXAqE5QjSwxFzuVU1CVG/4Z4aR+XQyI2dVGfmN3hbqg+r1tYhR2L6F2caSz48f1\nIdKpCe9diSywqBfXJx8NWdt2t8C7n9dlDulH+eFnEs4uIYm50TNfk9GEEykqkEoe\nGRUrcHDcAk8q/lC7eGUlfUZpJM74H5RgGzLLIPUCgYBF8KLxhwLGJGHqXo6ielRm\ngMlRNDuncxhQ2Z2SHnXkKqnSXBXJSCLegymOQ6T9JtaCwvvTbdmPQ38mGVR+SePy\nRFS7vWqsYNzCgNoylMo5vSCg5aU2107dfAkyR0EWlr9zuLwuaHUlKCufeZDEBTza\n8/YWzNHAAr2pOHfWP7VtNw==\n-----END PRIVATE KEY-----\n",
+    "client_email": "flowwork@braided-analyst-427209-f3.iam.gserviceaccount.com",
+    "client_id": "104326586549324988233",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/flowwork%40braided-analyst-427209-f3.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }

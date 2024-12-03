@@ -8,6 +8,7 @@ from amount.prices import *
 import asyncio
 from messages.message import *
 from db.db import *
+from db.sheets import *
 
 router_admin = Router()
 
@@ -36,6 +37,14 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
     await callback.message.edit_text(
         text='Админ', 
         reply_markup=admin_unine()
+    )
+
+@router_admin.callback_query(F.data == 'sheets')
+async def sheets(callback: CallbackQuery):
+    sheets_main()
+    await callback.message.edit_text(
+        text='https://docs.google.com/spreadsheets/d/1NgffQSCqM7b8vS0Ls71uyCeNURgfuiz8K34zrq2ZFU8/edit?usp=sharing',
+        reply_markup=back_admin()
     )
 
 @router_admin.callback_query(F.data.startswith('sh_requests'))
