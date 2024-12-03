@@ -41,7 +41,7 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
 
 @router_admin.callback_query(F.data == 'sheets')
 async def sheets(callback: CallbackQuery):
-    sheets_main()
+    await sheets_main('https://docs.google.com/spreadsheets/d/1NgffQSCqM7b8vS0Ls71uyCeNURgfuiz8K34zrq2ZFU8/edit?usp=sharing')
     await callback.message.edit_text(
         text='https://docs.google.com/spreadsheets/d/1NgffQSCqM7b8vS0Ls71uyCeNURgfuiz8K34zrq2ZFU8/edit?usp=sharing',
         reply_markup=back_admin()
