@@ -42,7 +42,28 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
 async def sh_requests(callback: CallbackQuery):
     n = int(callback.data.split()[1])
     forms = get_all_applications()
-    # form = forms[n]
+    data = forms[n]
+    msg = f"Заявка № {data['id']} от @{data['username']}\n\n"
+    msg += f"1. Название организации: {data['name']}\n"
+    msg += f"2. Место нахождения и адрес места осуществления деятельности: {data['street']}\n"
+    msg += f"3. Телефон: {data['phone']}\n"
+    msg += f"5. Email: {data['email']}\n"
+    msg += f"6. ИНН: {data['inn']}\n"
+    msg += f"7. КПП: {data['kpp']}\n"
+    msg += f"8. ОГРН: {data['ogrn']}\n"
+    msg += f"9. Руководитель (должность ФИО): {data['boss']}\n"
+    msg += f"10. Дополнительно: {data['more']}\n"
+    msg += f"11. Наименование продукции: {data['name_prod']}\n"
+    msg += f"12. Протокол испытаний ЭЗ: {data['trial']}\n"
+    msg += f"13. Торговая марка: {data['mark']}\n"
+    msg += f"14. ОКПД2: {data['okpd2']}\n"
+    msg += f"15. ТНВЭД: {data['tnv']}\n"
+    msg += f"16. Контракт: {data['kontrkt']}\n"
+    msg += f"17. ДУЛ: {data['dyl']}\n"
+    msg += f"18. Количество: {data['counnt']}\n"
+    msg += f"19. Название организации: {data['name_org']}\n"
+    msg += f"20. Адрес места нахождения: {data['street_org']}\n"
+    msg += f"21. Дополнительно: {data['more_add']}\n"
     await callback.message.edit_text(
         text=f"{forms}",
         reply_markup=requests_inline(n)
