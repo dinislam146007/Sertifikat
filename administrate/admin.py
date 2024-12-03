@@ -42,7 +42,7 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
 async def sh_requests(callback: CallbackQuery):
     n = int(callback.data.split()[1])
     forms = get_all_applications()
-    await callback.message.answer(f"{n, forms}")
+    # await callback.message.answer(f"{n, forms}")
     data = forms[n]
     msg = f"Заявка № {data['id']} от @{data['username']}\n\n"
     msg += f"1. Название организации: {data['name']}\n"
