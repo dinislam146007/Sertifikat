@@ -70,6 +70,7 @@ def admin_unine():
         [InlineKeyboardButton(text='Изменить цены на сертификацию', callback_data='change_price start')],
         [InlineKeyboardButton(text='Изменить сообщение', callback_data='edit_mes start')],
         [InlineKeyboardButton(text='Запустить рассылку', callback_data='newsletter')],
+        [InlineKeyboardButton(text='Заявки', callback_data='requests 0')],
         [InlineKeyboardButton(text='Назад', callback_data='close_state')],
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
@@ -115,5 +116,14 @@ def search_answer_inline():
         [InlineKeyboardButton(text='Уточнить у менеджера', url='https://t.me/Nastia_NZ')],
         [InlineKeyboardButton(text='Попробовать ввести ещё раз', callback_data='search')],
         [InlineKeyboardButton(text='Назад', callback_data='close_state')]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def requests_inline(n):
+    kb = [
+        [InlineKeyboardButton(text='<-', callback_data=f'requests {n - 1}'),
+         InlineKeyboardButton(text='Назад', callback_data='admin'),
+         InlineKeyboardButton(text='->', callback_data=f'requests {n + 1}')
+         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

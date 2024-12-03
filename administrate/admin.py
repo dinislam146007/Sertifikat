@@ -38,6 +38,17 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
         reply_markup=admin_unine()
     )
 
+@router_admin.callback_query(F.data.startswith('requests'))
+async def requests(callback: CallbackQuery):
+    n = int(callback.data.split()[1])
+    forms = get_all_applications()
+    form = forms[n]
+    await callback.message.edit_text(
+        text=f"{forms}",
+        reply_markup=requests_inline(n)
+    )
+
+
 @router_admin.callback_query(F.data.startswith('edit_mes'))
 async def edit_mes(callback: CallbackQuery, state: FSMContext):
     action = callback.data.split()[1]

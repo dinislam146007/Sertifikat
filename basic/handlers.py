@@ -76,7 +76,7 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
         admin = False
 
     await callback.message.edit_text(
-        text="Привет",
+        text=get_start_mes(),
         reply_markup=start_inline(admin)  
     )
 
@@ -354,6 +354,7 @@ async def request_three(message: Message, state: FSMContext, bot: Bot):
     msg += f"19. Название организации: {data['name_org']}\n"
     msg += f"20. Адрес места нахождения: {data['street_org']}\n"
     msg += f"21. Дополнительно: {data['more_add']}\n"
+    add_application(data)
     await  bot.send_message(
         text=msg,
         chat_id=6634277726

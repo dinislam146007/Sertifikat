@@ -16,6 +16,34 @@ CREATE TABLE IF NOT EXISTS users (
 )
 """)
 
+cursor.execute('''
+        CREATE TABLE IF NOT EXISTS applications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            name TEXT,
+            street TEXT,
+            phone TEXT,
+            email TEXT,
+            inn TEXT,
+            kpp TEXT,
+            ogrn TEXT,
+            boss TEXT,
+            more TEXT,
+            name_prod TEXT,
+            trial TEXT,
+            mark TEXT,
+            okpd2 TEXT,
+            tnv TEXT,
+            kontrkt TEXT,
+            dyl TEXT,
+            counnt INTEGER,
+            name_org TEXT,
+            street_org TEXT,
+            more_add TEXT
+        )
+    ''')
+
+
 conn.commit()
 
 def set_user(user_id, username):
@@ -40,3 +68,35 @@ def get_user(user_id):
     """, (user_id,))
     row = cursor.fetchmany()
     return row
+
+
+def add_application(data):
+    cursor.execute('''
+        INSERT INTO applications (
+            username, name, street, phone, email, inn, kpp, ogrn, boss, more,
+            name_prod, trial, mark, okpd2, tnv, kontrkt, dyl, counnt, name_org, street_org, more_add
+        ) VALUES (
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        )
+    ''', (
+        data.get('username'), data.get('name'), data.get('street'), data.get('phone'),
+        data.get('email'), data.get('inn'), data.get('kpp'), data.get('ogrn'),
+        data.get('boss'), data.get('more'), data.get('name_prod'), data.get('trial'),
+        data.get('mark'), data.get('okpd2'), data.get('tnv'), data.get('kontrkt'),
+        data.get('dyl'), data.get('counnt'), data.get('name_org'), data.get('street_org'),
+        data.get('more_add')
+    ))
+    conn.commit()
+    conn.close()
+
+def get_all_applications():
+    cursor.execute('SELECT * FROM applications')
+    rows = cursor.fetchall()
+
+    # Получение списка словарей
+    columns = [column[0] for column in cursor.description]
+    applications = [dict(zip(columns, row)) for row in rows]
+    
+    conn.close()
+    return applications
+

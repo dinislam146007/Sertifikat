@@ -1,8 +1,11 @@
 venv/
 __pycache__/
 *.pyc
+*.txt
+start_mes.txt
 messages/inf.txt
 messages/services.txt
 sertifikat.db
 messages/search.txt
 messages/start_mes.txt
+start_mes.txt
