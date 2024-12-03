@@ -42,7 +42,7 @@ async def admin_main(callback: CallbackQuery, state: FSMContext, bot: Bot):
 async def sh_requests(callback: CallbackQuery):
     n = int(callback.data.split()[1])
     forms = get_all_applications()
-    form = forms[n]
+    # form = forms[n]
     await callback.message.edit_text(
         text=f"{forms}",
         reply_markup=requests_inline(n)
