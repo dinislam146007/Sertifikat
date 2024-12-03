@@ -119,11 +119,12 @@ def search_answer_inline():
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
-def requests_inline(n):
+def requests_inline(n, len_n):
     kb = [
-        [InlineKeyboardButton(text='<-', callback_data=f'requests {n - 1}'),
+        [InlineKeyboardButton(text=f"{n + 1} / {len_n}", callback_data='fff')],
+        [InlineKeyboardButton(text='<-', callback_data=f'sh_requests {n - 1}'),
          InlineKeyboardButton(text='Назад', callback_data='admin'),
-         InlineKeyboardButton(text='->', callback_data=f'requests {n + 1}')
+         InlineKeyboardButton(text='->', callback_data=f'sh_requests {n + 1}')
          ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)

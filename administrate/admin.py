@@ -67,7 +67,7 @@ async def sh_requests(callback: CallbackQuery):
     msg += f"21. Дополнительно: {data['more_add']}\n"
     await callback.message.edit_text(
         text=msg,
-        reply_markup=requests_inline(n)
+        reply_markup=requests_inline(n, len(forms))
     )
 
 
