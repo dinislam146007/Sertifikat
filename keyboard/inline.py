@@ -70,7 +70,7 @@ def admin_unine():
         [InlineKeyboardButton(text='Изменить цены на сертификацию', callback_data='change_price start')],
         [InlineKeyboardButton(text='Изменить сообщение', callback_data='edit_mes start')],
         [InlineKeyboardButton(text='Запустить рассылку', callback_data='newsletter')],
-        [InlineKeyboardButton(text='Заявки', callback_data='requests 0')],
+        [InlineKeyboardButton(text='Заявки', callback_data='sh_requests 0')],
         [InlineKeyboardButton(text='Назад', callback_data='close_state')],
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
