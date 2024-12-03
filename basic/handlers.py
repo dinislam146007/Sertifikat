@@ -360,7 +360,7 @@ async def request_three(message: Message, state: FSMContext, bot: Bot):
         chat_id=6634277726
     )
     text = 'Заявка отправлена! '
-    msg = await message.answer(text)
+    # msg = await message.answer(text)
 
     await state.clear()
 

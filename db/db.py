@@ -87,7 +87,6 @@ def add_application(data):
         data.get('more_add')
     ))
     conn.commit()
-    conn.close()
 
 def get_all_applications():
     cursor.execute('SELECT * FROM applications')
@@ -97,6 +96,5 @@ def get_all_applications():
     columns = [column[0] for column in cursor.description]
     applications = [dict(zip(columns, row)) for row in rows]
     
-    conn.close()
     return applications
 
