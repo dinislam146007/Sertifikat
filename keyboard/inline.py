@@ -54,12 +54,11 @@ def cert_inline(type_cert, trts_type):
         kb.append([InlineKeyboardButton(text='ТРТС 018', callback_data='cert 0 018')])
         kb.append([InlineKeyboardButton(text='ТРТС 020', callback_data='cert 0 020')])
     else:
-
         kb.append(
             [InlineKeyboardButton(text='Оставить заявку', callback_data=f'request {type_cert} {trts_type}')], 
         )
     kb.append(
-        [InlineKeyboardButton(text='Назад', callback_data="close_state")]
+        [InlineKeyboardButton(text='Назад', callback_data="search")]
     )
     return InlineKeyboardMarkup(inline_keyboard=kb)
 

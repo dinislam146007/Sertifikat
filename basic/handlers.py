@@ -83,6 +83,10 @@ async def close_state(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == 'search')
 async def search(callback: CallbackQuery, state: FSMContext):
+    try:
+        await state.clear()
+    except Exception:
+        pass
     # text = 'Укажите тип вашей продукции во множественном числе, например:\n'
     # text += '<i>Шампунь >> шампуни</i>\n'
     # text += '<i>Микроволновки >> печи микроволновые</i>\n'
